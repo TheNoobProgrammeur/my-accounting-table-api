@@ -49,10 +49,11 @@ jobs:
       - run:
           name: spring boot test
           command: ./gradlew test
+      - run:
+          name: Codecov
+          command: bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
-          path: |
-           ./build/reports
-           bash <(curl -s https://codecov.io/bash)
+          path: ./build/reports
           destination: reports
       - store_test_results:
           path: ./build/test-results
