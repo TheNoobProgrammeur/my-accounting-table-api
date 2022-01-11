@@ -9,17 +9,27 @@ import java.math.BigDecimal
 class SubAccountClassService {
 
     fun outlay(subAccountClass: SubAccountClass): BigDecimal {
-        val outlay = BigDecimal(0)
-        subAccountClass.listFlux.filter{ it.typeFlux == TypeFlux.OUTPUT }.map{ outlay.add(it.amount)}
+        var outlay = BigDecimal(0.00)
+        subAccountClass.listFlux?.filter {
+            it.typeFlux == TypeFlux.OUTPUT
+        }?.map {
+            outlay = outlay.add(it.amount)
+        }
         return outlay
     }
+
     fun income(subAccountClass: SubAccountClass): BigDecimal {
-        val income = BigDecimal(0)
-        subAccountClass.listFlux.filter { it.typeFlux == TypeFlux.INPUT }.map { income.add(it.amount) }
+        var income = BigDecimal(0.00)
+        subAccountClass.listFlux?.filter {
+            it.typeFlux == TypeFlux.INPUT
+        }?.map {
+            income = income.add(it.amount)
+        }
         return income
     }
+
     fun difference(subAccountClass: SubAccountClass): BigDecimal {
-        return  income(subAccountClass) - outlay(subAccountClass)
+        return income(subAccountClass).subtract(outlay(subAccountClass))
     }
 
 }
