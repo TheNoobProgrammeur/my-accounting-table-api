@@ -1,0 +1,69 @@
+@startuml
+
+class User
+
+class AccountingMonth {
+    id: Long
+    year: Int
+    month: Int
+
+    accounts: List<AccountClass>
+    income: MonthlyIncomes
+}
+
+class MonthlyIncomes {
+    id: Long
+    incomes: Lis<MonthlyIncome>
+}
+
+class MonthlyIncome {
+    id: Long
+    planned: Double
+    actual: Double
+}
+
+
+class AccountClass {
+    id: Long
+    name: String
+    flux: List<SubAccountClass>: MonetaryFlux
+    Description: String
+    monthlyIncomes: MonthlyIncomes
+
+    outlay(): Double
+    income(): Double
+    difference(): Double
+}
+
+class SubAccountClass {
+    id: Long
+    name: String
+    flux: List<MonetaryFlux>: MonetaryFlux
+    Description: String
+
+    outlay(): Double
+    income(): Double
+    difference(): Double
+}
+
+class MonetaryFlux {
+    id: Long
+    type: TypeFlux
+    amount: Double
+    detail: String
+}
+
+enum TypeFlux {
+    INPUT
+    OUTPUT
+}
+
+SubAccountClass *-- MonetaryFlux
+SubAccountClass --* AccountClass
+AccountingMonth --* AccountClass
+User --* AccountingMonth
+AccountingMonth --- MonthlyIncomes
+MonthlyIncomes *-- MonthlyIncome
+MonetaryFlux -- TypeFlux
+
+@enduml
