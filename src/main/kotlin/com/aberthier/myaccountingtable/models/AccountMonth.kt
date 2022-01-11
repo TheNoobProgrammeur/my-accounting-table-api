@@ -15,14 +15,14 @@ class AccountMonth (
         @GeneratedValue
         var id: Long? = null,
 
-        var date: YearMonth? = YearMonth.now(),
+        var date: YearMonth = YearMonth.now(),
 
         @OneToMany
         @JoinColumn(name = "id_account_month")
-        var monthlyIncomes: List<MonthlyIncomes>,
+        var monthlyIncomes: List<MonthlyIncomes> = ArrayList<MonthlyIncomes>(),
 
 
         @OneToMany
         @JoinColumn(name = "id_account_month")
-        var accountClass: List<AccountClass>,
+        var accountClass: List<AccountClass> = ArrayList<AccountClass>(),
         )
