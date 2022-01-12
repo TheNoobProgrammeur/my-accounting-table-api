@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@3.2.2
+
 jobs:
   build:
     environment:
@@ -49,9 +52,6 @@ jobs:
       - run:
           name: spring boot test
           command: ./gradlew test
-      - run:
-          name: Codecov
-          command: bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
           path: ./build/reports
           destination: reports
@@ -62,7 +62,9 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build
-    - test:
-        requires:
-          - build
+      - build
+      - test:
+          requires:
+            - build
+          post-steps:
+            - codecov/upload
