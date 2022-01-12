@@ -10,19 +10,15 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "account_month")
-class AccountMonth(
-        @Id
-        @GeneratedValue
-        var id: Long? = null,
-
-        var date: YearMonth = YearMonth.now(),
-
-        @OneToMany
-        @JoinColumn(name = "id_account_month")
-        var monthlyIncomes: List<MonthlyIncomes> = ArrayList<MonthlyIncomes>(),
-
-
-        @OneToMany
-        @JoinColumn(name = "id_account_month")
-        var accountClass: List<AccountClass> = ArrayList<AccountClass>(),
+data class AccountMonth(
+    var date: YearMonth = YearMonth.now(),
+    @OneToMany
+    @JoinColumn(name = "id_account_month")
+    var monthlyIncomes: MutableList<MonthlyIncomes> = ArrayList<MonthlyIncomes>(),
+    @OneToMany
+    @JoinColumn(name = "id_account_month")
+    var accountClass: List<AccountClass> = ArrayList<AccountClass>(),
+    @Id
+    @GeneratedValue
+    var id: Long? = null,
 )

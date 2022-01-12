@@ -14,14 +14,11 @@ import javax.persistence.Table
 @NoArgsConstructor
 @Table(name = "sub_account_class")
 class SubAccountClass(
-
     var name: String,
     var description: String? = null,
-
     @OneToMany
     @JoinColumn(name = "id_sub_account")
     var listFlux: MutableList<MonetaryFlux>? = ArrayList<MonetaryFlux>(),
-
     @Id
     @GeneratedValue
     var id: Long? = null

@@ -1,8 +1,8 @@
 package com.aberthier.myaccountingtable.web
 
-import com.aberthier.myaccountingtable.controller.dto.ResponseUserDto
-import com.aberthier.myaccountingtable.controller.dto.UserDto
 import com.aberthier.myaccountingtable.dto.ErrorResponseTestDto
+import com.aberthier.myaccountingtable.dto.ResponseUserDto
+import com.aberthier.myaccountingtable.dto.UserDto
 import com.aberthier.myaccountingtable.models.User
 import com.aberthier.myaccountingtable.repository.UserRepository
 import org.junit.jupiter.api.Assertions.assertEquals
