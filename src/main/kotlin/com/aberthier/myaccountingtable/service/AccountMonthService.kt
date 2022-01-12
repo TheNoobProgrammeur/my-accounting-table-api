@@ -10,7 +10,7 @@ class AccountMonthService {
     @Autowired
     lateinit var accountMonthRepository: AccountMonthRepository
 
-    fun initCurrentAccountMonth(): AccountMonth{
+    fun initCurrentAccountMonth(): AccountMonth {
         val currentAccountMonth = AccountMonth()
         accountMonthRepository.save(currentAccountMonth)
         return currentAccountMonth

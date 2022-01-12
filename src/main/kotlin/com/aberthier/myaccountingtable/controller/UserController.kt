@@ -4,13 +4,14 @@ import com.aberthier.myaccountingtable.controller.dto.ResponseUserDto
 import com.aberthier.myaccountingtable.controller.dto.UserDto
 import com.aberthier.myaccountingtable.models.User
 import com.aberthier.myaccountingtable.service.UserService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping( "/user")
 class UserController(
-        val userService: UserService
+    @Autowired val userService: UserService
 ) {
 
     @GetMapping("/{id}")

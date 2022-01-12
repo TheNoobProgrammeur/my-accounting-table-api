@@ -14,13 +14,13 @@ import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class UserService() {
+class UserService(
+    @Autowired
+    var userRepository: UserRepository,
 
     @Autowired
-    lateinit var userRepository: UserRepository
-
-    @Autowired
-    lateinit var accountMonthService: AccountMonthService
+    var accountMonthService: AccountMonthService
+) {
 
     fun  findUserById(id: Long): ResponseEntity<User>  {
         val optUser: Optional<User> = userRepository.findById(id)

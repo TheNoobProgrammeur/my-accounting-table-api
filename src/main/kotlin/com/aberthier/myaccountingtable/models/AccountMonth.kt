@@ -4,13 +4,13 @@ import java.time.YearMonth
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
-import javax.persistence.Table
-import javax.persistence.OneToMany
 import javax.persistence.JoinColumn
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
 @Table(name = "account_month")
-class AccountMonth (
+class AccountMonth(
         @Id
         @GeneratedValue
         var id: Long? = null,
@@ -25,4 +25,4 @@ class AccountMonth (
         @OneToMany
         @JoinColumn(name = "id_account_month")
         var accountClass: List<AccountClass> = ArrayList<AccountClass>(),
-        )
+)
