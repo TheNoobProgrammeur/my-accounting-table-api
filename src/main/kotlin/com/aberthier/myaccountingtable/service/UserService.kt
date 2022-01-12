@@ -1,7 +1,11 @@
 package com.aberthier.myaccountingtable.service
 
-import com.aberthier.myaccountingtable.dto.ResponseUserDto
-import com.aberthier.myaccountingtable.dto.UserDto
+import com.aberthier.myaccountingtable.dto.user.UserCreateDto
+import com.aberthier.myaccountingtable.dto.user.UserDeleteDto
+import com.aberthier.myaccountingtable.dto.user.UserDto
+import com.aberthier.myaccountingtable.dto.user.toUser
+import com.aberthier.myaccountingtable.dto.user.toUserCreateDto
+import com.aberthier.myaccountingtable.dto.user.toUserDto
 import com.aberthier.myaccountingtable.exceptions.NotFondException
 import com.aberthier.myaccountingtable.models.AccountMonth
 import com.aberthier.myaccountingtable.models.User
@@ -21,33 +25,26 @@ class UserService(
     var accountMonthService: AccountMonthService
 ) {
 
-    fun findUserById(id: Long): ResponseEntity<User> {
+    fun findUserById(id: Long): ResponseEntity<UserDto> {
         val optUser: Optional<User> = userRepository.findById(id)
         if (optUser.isPresent) {
             val user = optUser.get()
-            return ResponseEntity<User>(user, HttpStatus.OK)
+            return ResponseEntity<UserDto>(user.toUserDto(), HttpStatus.OK)
         } else {
             throw NotFondException()
         }
     }
 
-    fun createUser(user: UserDto): ResponseEntity<ResponseUserDto> {
-
+    fun createUser(user: UserDto): ResponseEntity<UserCreateDto> {
         val currentAccountMonth: AccountMonth = accountMonthService.initCurrentAccountMonth()
-
-        val savedUser: User = User(
-            user.firstname,
-            user.lastname
-        )
-
+        val savedUser = user.toUser()
         savedUser.accountMonth?.put(currentAccountMonth.date, currentAccountMonth)
         userRepository.save(savedUser)
-        return ResponseEntity(ResponseUserDto(savedUser.id!!, "User create"), HttpStatus.CREATED)
-
+        return ResponseEntity(savedUser.toUserCreateDto(), HttpStatus.CREATED)
     }
 
-    fun deleteUser(id: Long): ResponseEntity<ResponseUserDto> {
+    fun deleteUser(id: Long): ResponseEntity<UserDeleteDto> {
         userRepository.deleteById(id)
-        return ResponseEntity(ResponseUserDto(id, "User delete"), HttpStatus.OK)
+        return ResponseEntity(UserDeleteDto(), HttpStatus.OK)
     }
 }

@@ -1,7 +1,6 @@
 comment: # this is a top-level key
   layout: "reach, diff, flags, files"
   behavior: default
-  require_changes: true  # if true: only post the comment if coverage changes
 
 ignore:
   - ".circleci"

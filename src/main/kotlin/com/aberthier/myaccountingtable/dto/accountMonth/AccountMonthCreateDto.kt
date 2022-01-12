@@ -12,7 +12,7 @@ data class AccountMonthCreateDto(
     var date: YearMonth? = null,
 
     @JsonProperty("message")
-    var message: String? = null
+    var message: String = "CREATED"
 )
 
-fun AccountMonth.toAccountMonthCreateDto(message: String) = run { AccountMonthCreateDto(id, date, "CREATED") }
+fun AccountMonth.toAccountMonthCreateDto() = run { AccountMonthCreateDto(id, date) }

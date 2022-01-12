@@ -1,8 +1,8 @@
 package com.aberthier.myaccountingtable.controller
 
-import com.aberthier.myaccountingtable.dto.ResponseUserDto
-import com.aberthier.myaccountingtable.dto.UserDto
-import com.aberthier.myaccountingtable.models.User
+import com.aberthier.myaccountingtable.dto.user.UserCreateDto
+import com.aberthier.myaccountingtable.dto.user.UserDeleteDto
+import com.aberthier.myaccountingtable.dto.user.UserDto
 import com.aberthier.myaccountingtable.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -22,17 +22,17 @@ class UserController {
     lateinit var userService: UserService
 
     @GetMapping("/{id}")
-    fun getUser(@PathVariable("id") id: Long): ResponseEntity<User> {
+    fun getUser(@PathVariable("id") id: Long): ResponseEntity<UserDto> {
         return userService.findUserById(id)
     }
 
     @PostMapping
-    fun postUser(@RequestBody user: UserDto): ResponseEntity<ResponseUserDto> {
+    fun postUser(@RequestBody user: UserDto): ResponseEntity<UserCreateDto> {
         return userService.createUser(user)
     }
 
     @DeleteMapping("/{id}")
-    fun deleteUser(@PathVariable("id") id: Long): ResponseEntity<ResponseUserDto> {
+    fun deleteUser(@PathVariable("id") id: Long): ResponseEntity<UserDeleteDto> {
         return userService.deleteUser(id)
     }
 }

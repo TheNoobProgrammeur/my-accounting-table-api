@@ -41,8 +41,8 @@ class AccountMonthService {
             accountMonth = initCurrentAccountMonth()
         }
         user.accountMonth?.put(accountMonth.date, accountMonth)
-        val a = accountMonth.toAccountMonthCreateDto("Created")
-        return ResponseEntity<AccountMonthCreateDto>(a, HttpStatus.CREATED)
+        val accountMonthDto = accountMonth.toAccountMonthCreateDto()
+        return ResponseEntity<AccountMonthCreateDto>(accountMonthDto, HttpStatus.CREATED)
     }
 
 }

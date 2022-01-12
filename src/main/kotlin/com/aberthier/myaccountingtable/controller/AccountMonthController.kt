@@ -1,7 +1,7 @@
 package com.aberthier.myaccountingtable.controller
 
 import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthCreateDto
-import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthCreateInfos
+import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthParams
 import com.aberthier.myaccountingtable.service.AccountMonthService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -17,10 +17,10 @@ class AccountMonthController {
     lateinit var accountMonthService: AccountMonthService
 
     @PostMapping
-    fun createAccountMonthService(@RequestBody accountMonthCreateInfos: AccountMonthCreateInfos): ResponseEntity<AccountMonthCreateDto> {
+    fun createAccountMonthService(@RequestBody params: AccountMonthParams): ResponseEntity<AccountMonthCreateDto> {
         return accountMonthService.initAccountMonth(
-            accountMonthCreateInfos.userId,
-            accountMonthCreateInfos.date
+            params.userId,
+            params.date
         )
     }
 

@@ -1,8 +1,9 @@
 package com.aberthier.myaccountingtable.web
 
 import com.aberthier.myaccountingtable.dto.ErrorResponseTestDto
-import com.aberthier.myaccountingtable.dto.ResponseUserDto
-import com.aberthier.myaccountingtable.dto.UserDto
+import com.aberthier.myaccountingtable.dto.user.UserCreateDto
+import com.aberthier.myaccountingtable.dto.user.UserDeleteDto
+import com.aberthier.myaccountingtable.dto.user.UserDto
 import com.aberthier.myaccountingtable.models.User
 import com.aberthier.myaccountingtable.repository.UserRepository
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -86,13 +87,13 @@ internal class UserTest {
         val requestEntity: HttpEntity<UserDto> = HttpEntity<UserDto>(body, headers)
 
         val url = URI(applicationUrl() + "/user")
-        val res = restTemplate.postForEntity(url, requestEntity, ResponseUserDto::class.java)
+        val res = restTemplate.postForEntity(url, requestEntity, UserCreateDto::class.java)
 
         assertNotNull(res)
         assertEquals(res.statusCode, HttpStatus.CREATED)
         val resBody = res.body
         assertEquals(resBody?.id, 1)
-        assertEquals(resBody?.message, "User create")
+        assertEquals(resBody?.message, "USER CREATED")
     }
 
     @Test
@@ -104,12 +105,10 @@ internal class UserTest {
         val url = URI(applicationUrl() + "/user/1")
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
-        val requestEntity: HttpEntity<ResponseUserDto> = HttpEntity<ResponseUserDto>(headers)
-        val res = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, ResponseUserDto::class.java)
+        val requestEntity: HttpEntity<UserDeleteDto> = HttpEntity<UserDeleteDto>(headers)
+        val res = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, UserDeleteDto::class.java)
 
         assertNotNull(res)
         assertEquals(res.statusCode, HttpStatus.OK)
-        val resUser = res.body
-        assertEquals(resUser?.id, 1)
     }
 }
