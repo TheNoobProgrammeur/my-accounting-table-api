@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.resolve.sam.getAbstractMembers
 
 plugins {
     id("org.springframework.boot") version "2.6.2"
@@ -64,7 +63,7 @@ tasks.test {
     finalizedBy(tasks.jacocoTestReport)
 }
 
-tasks.jacocoTestReport  {
+tasks.jacocoTestReport {
     dependsOn(tasks.test)
 
     reports {
@@ -72,14 +71,4 @@ tasks.jacocoTestReport  {
         csv.required.set(false)
         html.required.set(false)
     }
-    finalizedBy(tasks.findByName("copyJacocoRapport"))
 }
-
-
-
-
-tasks.register<Copy>("copyJacocoRapport") {
-    from("$buildDir/reports/jacoco/test/jacocoTestReport.xml")
-    into("$buildDir/sonar/coverage/jacoco/xmlReportPaths")
-}
-
