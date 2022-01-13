@@ -9,15 +9,12 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "account_class")
-class AccountClass(
-
-    var name: String,
-    var description: String,
-
+data class AccountClass(
+    var name: String? = null,
+    var description: String? = null,
     @OneToMany
     @JoinColumn(name = "id_account")
     var subsAccountClass: MutableList<SubAccountClass> = ArrayList<SubAccountClass>(),
-
     @Id
     @GeneratedValue
     var id: Long? = null,

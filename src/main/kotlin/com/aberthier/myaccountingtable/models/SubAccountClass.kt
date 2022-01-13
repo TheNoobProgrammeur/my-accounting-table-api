@@ -13,8 +13,8 @@ import javax.persistence.Table
 @Data
 @NoArgsConstructor
 @Table(name = "sub_account_class")
-class SubAccountClass(
-    var name: String,
+data class SubAccountClass(
+    var name: String? = null,
     var description: String? = null,
     @OneToMany
     @JoinColumn(name = "id_sub_account")

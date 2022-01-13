@@ -17,8 +17,8 @@ import javax.persistence.Table
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "user")
-class User(
+@Table(name = "app_user")
+data class User(
     var firstname: String,
     var lastname: String,
     @OneToMany

@@ -10,8 +10,8 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "monthly_incomes")
-class MonthlyIncomes(
-    var name: String,
+data class MonthlyIncomes(
+    var name: String? = null,
     var details: String? = null,
     var actual: BigDecimal,
     var planed: BigDecimal? = null,

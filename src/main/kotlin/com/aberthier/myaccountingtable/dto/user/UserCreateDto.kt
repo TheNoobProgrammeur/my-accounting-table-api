@@ -10,5 +10,4 @@ data class UserCreateDto(
     var message: String = "USER CREATED"
 )
 
-
 fun User.toUserCreateDto() = run { UserCreateDto(id) }

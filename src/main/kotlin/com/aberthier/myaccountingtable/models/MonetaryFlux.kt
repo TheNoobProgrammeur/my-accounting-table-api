@@ -12,8 +12,8 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "monetary_flux")
-class MonetaryFlux(
-    var amount: BigDecimal,
+data class MonetaryFlux(
+    var amount: BigDecimal? = null,
     @Enumerated(EnumType.STRING)
     var typeFlux: TypeFlux,
     var nom: String? = "Not specified",

@@ -45,7 +45,7 @@ internal class UserTest {
 
 
     @Test
-    fun tesGETUser() {
+    fun `GET User Test`() {
         `when`(userRepository.findById(1)).thenReturn(Optional.of(user))
 
 
@@ -60,7 +60,7 @@ internal class UserTest {
     }
 
     @Test
-    fun tesGETNotFondUser() {
+    fun `GET Not Fond User Test`() {
 
         val url = URI(applicationUrl() + "/user/1")
         val res = restTemplate.getForEntity(url, ErrorResponseTestDto::class.java)
@@ -73,7 +73,7 @@ internal class UserTest {
     }
 
     @Test
-    fun testPOSTUser() {
+    fun `test POST User` () {
         `when`(userRepository.save(any(User::class.java))).thenAnswer {
             val callback = it.arguments[0] as User
             callback.id = 1
@@ -97,7 +97,7 @@ internal class UserTest {
     }
 
     @Test
-    fun testDELETEUser() {
+    fun `test DELETE User`() {
         `when`(userRepository.deleteById(any(Long::class.java))).thenAnswer {
             null
         }

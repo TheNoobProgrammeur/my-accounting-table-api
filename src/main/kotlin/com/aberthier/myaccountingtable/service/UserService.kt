@@ -38,7 +38,7 @@ class UserService(
     fun createUser(user: UserDto): ResponseEntity<UserCreateDto> {
         val currentAccountMonth: AccountMonth = accountMonthService.initCurrentAccountMonth()
         val savedUser = user.toUser()
-        savedUser.accountMonth?.put(currentAccountMonth.date, currentAccountMonth)
+        savedUser.accountMonth?.put(currentAccountMonth.date!!, currentAccountMonth)
         userRepository.save(savedUser)
         return ResponseEntity(savedUser.toUserCreateDto(), HttpStatus.CREATED)
     }
