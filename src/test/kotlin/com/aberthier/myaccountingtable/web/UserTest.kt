@@ -6,6 +6,7 @@ import com.aberthier.myaccountingtable.dto.user.UserDeleteDto
 import com.aberthier.myaccountingtable.dto.user.UserDto
 import com.aberthier.myaccountingtable.models.User
 import com.aberthier.myaccountingtable.repository.UserRepository
+import com.aberthier.myaccountingtable.util.UserUtil
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
@@ -38,31 +39,29 @@ internal class UserTest {
     var port: Int = 0
 
     private fun applicationUrl() = "http://localhost:$port"
-    private final val userLastName = "lastname"
-    private final val userFirstName = "firstName"
-    private final val userId = 1L
-    val user = User(userFirstName, userLastName, id = userId)
+    private final val route = "/user"
 
+    private final val user = UserUtil.generateSimpleUser()
 
     @Test
-    fun `GET User Test`() {
-        `when`(userRepository.findById(1)).thenReturn(Optional.of(user))
+    fun `GET User`() {
+        `when`(userRepository.findById(any(Long::class.java))).thenAnswer {
+            Optional.of(user)
+        }.thenReturn(Optional.of(user))
 
-
-        val url = URI(applicationUrl() + "/user/1")
-        val res = restTemplate.getForEntity(url, User::class.java)
+        val url = URI(applicationUrl() + route + "/${user.id}")
+        val res = restTemplate.getForEntity(url, UserDto::class.java)
 
         assertNotNull(res)
         assertEquals(res.statusCode, HttpStatus.OK)
         val resUser = res.body
         assertEquals(resUser?.id, 1)
-        assertNotNull(resUser?.accountMonth)
     }
 
     @Test
-    fun `GET Not Fond User Test`() {
+    fun `GET Not Fond User`() {
 
-        val url = URI(applicationUrl() + "/user/1")
+        val url = URI(applicationUrl() + route + "/${user.id}")
         val res = restTemplate.getForEntity(url, ErrorResponseTestDto::class.java)
 
         assertNotNull(res)
@@ -73,7 +72,7 @@ internal class UserTest {
     }
 
     @Test
-    fun `test POST User` () {
+    fun `POST User`() {
         `when`(userRepository.save(any(User::class.java))).thenAnswer {
             val callback = it.arguments[0] as User
             callback.id = 1
@@ -83,10 +82,10 @@ internal class UserTest {
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
 
-        val body = UserDto(userFirstName, userLastName)
+        val body = UserDto(user.firstname, user.lastname)
         val requestEntity: HttpEntity<UserDto> = HttpEntity<UserDto>(body, headers)
 
-        val url = URI(applicationUrl() + "/user")
+        val url = URI(applicationUrl() + route)
         val res = restTemplate.postForEntity(url, requestEntity, UserCreateDto::class.java)
 
         assertNotNull(res)
@@ -97,12 +96,12 @@ internal class UserTest {
     }
 
     @Test
-    fun `test DELETE User`() {
+    fun `DELETE User`() {
         `when`(userRepository.deleteById(any(Long::class.java))).thenAnswer {
             null
         }
 
-        val url = URI(applicationUrl() + "/user/1")
+        val url = URI(applicationUrl() + route + "/${user.id}")
         val headers = HttpHeaders()
         headers.contentType = MediaType.APPLICATION_JSON
         val requestEntity: HttpEntity<UserDeleteDto> = HttpEntity<UserDeleteDto>(headers)

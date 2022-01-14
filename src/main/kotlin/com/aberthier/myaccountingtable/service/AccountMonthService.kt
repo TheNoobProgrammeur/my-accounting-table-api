@@ -25,7 +25,7 @@ class AccountMonthService(
         return currentAccountMonth
     }
 
-    fun initAccountMonth(id: Long, date: YearMonth?): ResponseEntity<AccountMonthCreateDto> {
+    fun initAccountMonth(id: Long, date: YearMonth? = null): ResponseEntity<AccountMonthCreateDto> {
         val accountMonth: AccountMonth
         val userOpt = userRepository.findById(id)
         if (userOpt.isEmpty) {
@@ -33,7 +33,7 @@ class AccountMonthService(
         }
         val user = userOpt.get()
 
-        if (user.accountMonth?.get(date) == null) {
+        if (date != null && user.accountMonth?.get(date) != null) {
             throw ConflictErrorException()
         }
 
