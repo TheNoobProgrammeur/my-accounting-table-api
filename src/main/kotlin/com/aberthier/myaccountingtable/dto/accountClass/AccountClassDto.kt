@@ -1,4 +1,4 @@
-package com.aberthier.myaccountingtable.dto.accountclass
+package com.aberthier.myaccountingtable.dto.accountClass
 
 import com.aberthier.myaccountingtable.dto.subAccountClass.SubAccountClassDto
 import com.aberthier.myaccountingtable.dto.subAccountClass.toSubAccountClassDto

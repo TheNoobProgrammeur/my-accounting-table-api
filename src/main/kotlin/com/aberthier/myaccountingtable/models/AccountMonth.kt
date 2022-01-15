@@ -22,7 +22,7 @@ data class AccountMonth(
     var monthlyIncomes: MutableList<MonthlyIncomes> = ArrayList<MonthlyIncomes>(),
     @OneToMany
     @JoinColumn(name = "id_account_month")
-    var accountsClass: List<AccountClass> = ArrayList<AccountClass>(),
+    var accountsClass: MutableList<AccountClass> = ArrayList<AccountClass>(),
     @Id
     @GeneratedValue
     var id: Long? = null,

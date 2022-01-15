@@ -4,7 +4,7 @@ import com.aberthier.myaccountingtable.models.AccountMonth
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.YearMonth
 
-data class AccountMonthCreateDto(
+data class AccountMonthOperationDto(
     @JsonProperty("id")
     var id: Long? = null,
 
@@ -12,7 +12,9 @@ data class AccountMonthCreateDto(
     var date: YearMonth? = null,
 
     @JsonProperty("message")
-    var message: String = "CREATED"
+    var message: String
 )
 
-fun AccountMonth.toAccountMonthCreateDto() = run { AccountMonthCreateDto(id, date) }
+fun AccountMonth.toAccountMonthCreateDto() = run { AccountMonthOperationDto(id, date, "CREATED") }
+fun AccountMonth.toAccountMonthAddAccountClassDto(nameAccountClass: String) =
+    run { AccountMonthOperationDto(id, date, "$nameAccountClass Account class adding") }

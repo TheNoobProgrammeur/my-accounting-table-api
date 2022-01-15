@@ -1,7 +1,7 @@
 package com.aberthier.myaccountingtable.dto.accountMonth
 
-import com.aberthier.myaccountingtable.dto.accountclass.AccountClassDto
-import com.aberthier.myaccountingtable.dto.accountclass.toAccountClassDto
+import com.aberthier.myaccountingtable.dto.accountClass.AccountClassDto
+import com.aberthier.myaccountingtable.dto.accountClass.toAccountClassDto
 import com.aberthier.myaccountingtable.models.AccountMonth
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.YearMonth

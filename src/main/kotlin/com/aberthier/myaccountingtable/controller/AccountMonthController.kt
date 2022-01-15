@@ -1,7 +1,8 @@
 package com.aberthier.myaccountingtable.controller
 
-import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthCreateDto
+import com.aberthier.myaccountingtable.dto.accountClass.AccountClassCreationDto
 import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthDto
+import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthOperationDto
 import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthParams
 import com.aberthier.myaccountingtable.service.AccountMonthService
 import org.springframework.http.ResponseEntity
@@ -20,7 +21,6 @@ class AccountMonthController(
     var accountMonthService: AccountMonthService
 ) {
 
-
     @GetMapping("/{id}")
     fun getAccountMonthService(
         @PathVariable("id") id: Long,
@@ -30,11 +30,22 @@ class AccountMonthController(
     }
 
     @PostMapping
-    fun createAccountMonthService(@RequestBody params: AccountMonthParams): ResponseEntity<AccountMonthCreateDto> {
+    fun createAccountMonthService(@RequestBody params: AccountMonthParams): ResponseEntity<AccountMonthOperationDto> {
         return accountMonthService.initAccountMonth(
             params.userId,
             params.date
         )
     }
+
+    @PostMapping("/class")
+    fun addAccountClass(@RequestBody accountClassCreationDto: AccountClassCreationDto): ResponseEntity<AccountMonthOperationDto> {
+        return accountMonthService.addAccountClass(
+            accountClassCreationDto.name,
+            accountClassCreationDto.userId,
+            accountClassCreationDto.date,
+            accountClassCreationDto.description
+        )
+    }
+
 
 }

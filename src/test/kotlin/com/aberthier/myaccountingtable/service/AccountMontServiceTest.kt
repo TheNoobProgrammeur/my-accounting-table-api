@@ -1,6 +1,7 @@
 package com.aberthier.myaccountingtable.service
 
 import com.aberthier.myaccountingtable.models.AccountMonth
+import com.aberthier.myaccountingtable.repository.AccountClassRepository
 import com.aberthier.myaccountingtable.repository.AccountMonthRepository
 import com.aberthier.myaccountingtable.repository.UserRepository
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -19,6 +20,9 @@ internal class AccountMontServiceTest {
 
     @Mock
     lateinit var accountMonthRepository: AccountMonthRepository
+
+    @Mock
+    lateinit var accountClassRepository: AccountClassRepository
 
     @Mock
     lateinit var userRepository: UserRepository

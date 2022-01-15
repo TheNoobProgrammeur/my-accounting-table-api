@@ -1,8 +1,8 @@
 package com.aberthier.myaccountingtable.web
 
 import com.aberthier.myaccountingtable.dto.ErrorResponseTestDto
-import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthCreateDto
 import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthDto
+import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthOperationDto
 import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthParams
 import com.aberthier.myaccountingtable.models.AccountMonth
 import com.aberthier.myaccountingtable.models.User
@@ -104,7 +104,7 @@ class AccountMonthTest {
         val requestEntity: HttpEntity<AccountMonthParams> = HttpEntity<AccountMonthParams>(body, headers)
 
         val url = URI(applicationUrl() + route)
-        val res = restTemplate.postForEntity(url, requestEntity, AccountMonthCreateDto::class.java)
+        val res = restTemplate.postForEntity(url, requestEntity, AccountMonthOperationDto::class.java)
 
         assertNotNull(res)
         assertEquals(res.statusCode, HttpStatus.CREATED)
@@ -127,7 +127,7 @@ class AccountMonthTest {
         val requestEntity: HttpEntity<AccountMonthParams> = HttpEntity<AccountMonthParams>(body, headers)
 
         val url = URI(applicationUrl() + route)
-        val res = restTemplate.postForEntity(url, requestEntity, AccountMonthCreateDto::class.java)
+        val res = restTemplate.postForEntity(url, requestEntity, AccountMonthOperationDto::class.java)
 
         assertNotNull(res)
         assertEquals(res.statusCode, HttpStatus.CREATED)

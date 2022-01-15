@@ -19,7 +19,7 @@ class TestUtil {
         fun generateSimpleMonthCount(
             date: YearMonth = YearMonth.now(),
             monthlyIncomes: MutableList<MonthlyIncomes> = ArrayList(),
-            accountsClass: List<AccountClass> = ArrayList(),
+            accountsClass: MutableList<AccountClass> = ArrayList(),
             id: Long = 1,
             userId: Long = 1,
         ): AccountMonth {
