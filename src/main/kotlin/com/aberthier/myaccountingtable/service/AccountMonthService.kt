@@ -54,10 +54,10 @@ class AccountMonthService(
         return ResponseEntity<AccountMonthCreateDto>(accountMonthDto, HttpStatus.CREATED)
     }
 
-    fun getAccountMont(id: Long, date: YearMonth? = null):  ResponseEntity<AccountMonthDto>{
+    fun getAccountMont(id: Long, date: YearMonth? = null): ResponseEntity<AccountMonthDto> {
         val dateSearch = date ?: YearMonth.now()
-         val accountOp = accountMonthRepository.findByUserIdAndDate(id, dateSearch)
-        if(accountOp.isEmpty) {
+        val accountOp = accountMonthRepository.findByUserIdAndDate(id, dateSearch)
+        if (accountOp.isEmpty) {
             throw NotFondException()
         }
         return ResponseEntity<AccountMonthDto>(accountOp.get().toDto(), HttpStatus.OK)

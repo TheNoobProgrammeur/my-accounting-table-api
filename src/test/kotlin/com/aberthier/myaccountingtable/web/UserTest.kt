@@ -6,7 +6,7 @@ import com.aberthier.myaccountingtable.dto.user.UserDeleteDto
 import com.aberthier.myaccountingtable.dto.user.UserDto
 import com.aberthier.myaccountingtable.models.User
 import com.aberthier.myaccountingtable.repository.UserRepository
-import com.aberthier.myaccountingtable.util.UserUtil
+import com.aberthier.myaccountingtable.util.TestUtil
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
@@ -41,7 +41,7 @@ internal class UserTest {
     private fun applicationUrl() = "http://localhost:$port"
     private final val route = "/user"
 
-    private final val user = UserUtil.generateSimpleUser()
+    private final val user = TestUtil.generateSimpleUser()
 
     @Test
     fun `GET User`() {
