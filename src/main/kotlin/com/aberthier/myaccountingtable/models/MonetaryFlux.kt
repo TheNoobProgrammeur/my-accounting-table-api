@@ -16,7 +16,7 @@ data class MonetaryFlux(
     var amount: BigDecimal? = null,
     @Enumerated(EnumType.STRING)
     var typeFlux: TypeFlux,
-    var nom: String? = "Not specified",
+    var name: String? = "Not specified",
     var detail: String? = null,
     @Id
     @GeneratedValue

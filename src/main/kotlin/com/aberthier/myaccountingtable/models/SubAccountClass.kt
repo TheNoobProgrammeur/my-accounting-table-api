@@ -1,7 +1,5 @@
 package com.aberthier.myaccountingtable.models
 
-import lombok.Data
-import lombok.NoArgsConstructor
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -10,8 +8,6 @@ import javax.persistence.OneToMany
 import javax.persistence.Table
 
 @Entity
-@Data
-@NoArgsConstructor
 @Table(name = "sub_account_class")
 data class SubAccountClass(
     var name: String? = null,

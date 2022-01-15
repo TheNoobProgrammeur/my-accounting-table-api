@@ -51,7 +51,7 @@ class AccountMonthTest{
     private final val route = "/account/month"
 
     @BeforeEach
-    fun `ìnit mocks`(){
+    fun `init mocks`(){
         `when`(userRepository.findById(
             any(Long::class.java))
         ).thenAnswer {

@@ -57,4 +57,4 @@ fun SubAccountClass.income() = run {
     income
 }
 
-fun SubAccountClass.difference() = run { income().subtract(outlay()) }
+fun SubAccountClass.difference(): BigDecimal = run { income().subtract(outlay()) }

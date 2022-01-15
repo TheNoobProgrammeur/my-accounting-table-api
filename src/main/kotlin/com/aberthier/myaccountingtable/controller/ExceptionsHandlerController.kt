@@ -83,11 +83,10 @@ class ExceptionsHandlerController(
 
         when (System.getenv("ENV")?.uppercase(Locale.getDefault())) {
             "STAGING" -> logger.debug(stackTrace)
-            "PRODUCTION" -> {}
+            "PRODUCTION" -> null
             else -> logger.debug(stackTrace)
         }
-
-        // environment-based logic
+        
         val stackTraceMessage =
             when (System.getenv("ENV")?.uppercase(Locale.getDefault())) {
                 "STAGING" -> stackTrace // returning the stack trace

@@ -1,7 +1,9 @@
 package com.aberthier.myaccountingtable.service
 
 import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthCreateDto
+import com.aberthier.myaccountingtable.dto.accountMonth.AccountMonthDto
 import com.aberthier.myaccountingtable.dto.accountMonth.toAccountMonthCreateDto
+import com.aberthier.myaccountingtable.dto.accountMonth.toDto
 import com.aberthier.myaccountingtable.exceptions.ConflictErrorException
 import com.aberthier.myaccountingtable.exceptions.NotFondException
 import com.aberthier.myaccountingtable.models.AccountMonth
@@ -50,6 +52,15 @@ class AccountMonthService(
 
         val accountMonthDto = accountMonth.toAccountMonthCreateDto()
         return ResponseEntity<AccountMonthCreateDto>(accountMonthDto, HttpStatus.CREATED)
+    }
+
+    fun getAccountMont(id: Long, date: YearMonth? = null):  ResponseEntity<AccountMonthDto>{
+        val dateSearch = date ?: YearMonth.now()
+         val accountOp = accountMonthRepository.findByUserIdAndDate(id, dateSearch)
+        if(accountOp.isEmpty) {
+            throw NotFondException()
+        }
+        return ResponseEntity<AccountMonthDto>(accountOp.get().toDto(), HttpStatus.OK)
     }
 
 }

@@ -1,6 +1,7 @@
 package com.aberthier.myaccountingtable.models
 
 import java.time.YearMonth
+import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -21,8 +22,12 @@ data class AccountMonth(
     var monthlyIncomes: MutableList<MonthlyIncomes> = ArrayList<MonthlyIncomes>(),
     @OneToMany
     @JoinColumn(name = "id_account_month")
-    var accountClass: List<AccountClass> = ArrayList<AccountClass>(),
+    var accountsClass: List<AccountClass> = ArrayList<AccountClass>(),
     @Id
     @GeneratedValue
     var id: Long? = null,
+
+    @Column(name = "user_id")
+    var userId: Long? = null
+
 )
