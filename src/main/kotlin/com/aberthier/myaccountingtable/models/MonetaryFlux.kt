@@ -12,15 +12,13 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "monetary_flux")
-class MonetaryFlux(
-
+data class MonetaryFlux(
+    var amount: BigDecimal? = null,
+    @Enumerated(EnumType.STRING)
+    var typeFlux: TypeFlux,
+    var name: String? = "Not specified",
+    var detail: String? = null,
     @Id
     @GeneratedValue
     var id: Long? = null,
-
-    var amount: BigDecimal,
-    @Enumerated(EnumType.STRING)
-    var typeFlux: TypeFlux,
-    var detail: String? = null
-
 )

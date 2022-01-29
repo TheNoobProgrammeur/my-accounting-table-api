@@ -1,8 +1,5 @@
 version: 2.1
 
-orbs:
-  codecov: codecov/codecov@3.2.2
-
 jobs:
   build:
     environment:
@@ -35,6 +32,7 @@ jobs:
           paths:
             - build
   test:
+    parallelism: 2
     environment:
       _JAVA_OPTIONS: "-Xmx3g"
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
@@ -52,6 +50,9 @@ jobs:
       - run:
           name: spring boot test
           command: ./gradlew test
+      - run:
+          name: Codecov
+          command: bash <(curl -s https://codecov.io/bash)
       - store_artifacts:
           path: ./build/reports
           destination: reports
@@ -66,5 +67,3 @@ workflows:
       - test:
           requires:
             - build
-          post-steps:
-            - codecov/upload

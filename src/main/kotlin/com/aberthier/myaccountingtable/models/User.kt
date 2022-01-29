@@ -17,17 +17,15 @@ import javax.persistence.Table
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "user")
-class User (
-        var firstname: String,
-        var lastname: String,
-
-        @OneToMany
-        @JoinColumn(name = "user_id")
-        @Cascade(CascadeType.DELETE)
-        var accountMonth: MutableMap<YearMonth, AccountMonth>? = HashMap<YearMonth, AccountMonth>(),
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long? = null
+@Table(name = "app_user")
+data class User(
+    var firstname: String,
+    var lastname: String,
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    @Cascade(CascadeType.DELETE)
+    var accountMonth: MutableMap<YearMonth, AccountMonth>? = HashMap<YearMonth, AccountMonth>(),
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long? = null
 )

@@ -1,3 +1,3 @@
 package com.aberthier.myaccountingtable.exceptions
 
-class NotFondException : Exception()
+class ConflictErrorException : Exception()
